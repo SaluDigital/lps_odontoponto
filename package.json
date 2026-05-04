@@ -1,0 +1,13 @@
+{
+  "name": "lps-nextodonto",
+  "version": "1.0.0",
+  "private": true,
+  "description": "Landing page estatica da NextOdonto.",
+  "scripts": {
+    "start": "node server.js",
+    "validate": "node scripts/validate.js"
+  },
+  "engines": {
+    "node": ">=18"
+  }
+}
