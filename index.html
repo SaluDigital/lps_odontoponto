@@ -201,19 +201,13 @@ section{position:relative}
 }
 .hero-notice svg{flex:0 0 18px;margin-top:1px}
 .hero-visual{position:relative;aspect-ratio:9/14;max-width:360px;margin:0 auto;border-radius:28px;overflow:hidden;box-shadow:var(--shadow-lg);transform:translateZ(0)}
-.hero-visual .mute-toggle{
-  position:absolute;bottom:16px;right:16px;z-index:10;
-  width:40px;height:40px;border-radius:50%;
-  background:rgba(0,0,0,0.5);color:#fff;
-  display:grid;place-items:center;cursor:pointer;
-  backdrop-filter:blur(4px);border:1px solid rgba(255,255,255,0.2);
-  transition:background .2s ease;
-}
-.hero-visual .mute-toggle:hover{background:rgba(0,0,0,0.7)}
-.hero-visual .mute-toggle svg{width:20px;height:20px}
-
 .hero-visual img,
 .hero-visual video{width:100%;height:100%;object-fit:cover}
+.hero-carousel{position:relative;width:100%;height:100%;}
+.hero-carousel-track{display:flex;height:100%;transition:transform .45s ease}
+.hero-carousel-slide{min-width:100%;height:100%;}
+.hero-carousel-slide img{width:100%;height:100%;object-fit:cover;display:block;}
+.hero-carousel .pain-carousel-dots{bottom:12px}
 .hero-frame{
   position:relative;width:fit-content;margin:0 auto;border-radius:32px;padding:14px;
   background:linear-gradient(135deg,rgba(255,107,112,0.24),rgba(184,13,18,0.22));
@@ -787,8 +781,29 @@ footer{background:#1F1F1F;color:#D1D1D1;padding:64px 0 28px;font-size:.93rem}
 /* hide spans visually but keep accessible (sr-only) */
 .sr-only{position:absolute;width:1px;height:1px;padding:0;margin:-1px;overflow:hidden;clip:rect(0,0,0,0);border:0}
 </style>
+<!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=AW-11286745105"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag("js", new Date());
+  gtag("config", "AW-11286745105");
+  gtag("config", "AW-938366047");
+  gtag("config", "G-D2NC9MDJMT");
+  gtag("config", "UA-140500801-1");
+</script>
+<!-- Google Tag Manager -->
+<script>
+  (function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({"gtm.start":
+  new Date().getTime(),event:"gtm.js"});var f=d.getElementsByTagName(s)[0],
+  j=d.createElement(s),dl=l!="dataLayer"?"&l="+l:"";j.async=true;j.src=
+  "https://www.googletagmanager.com/gtm.js?id="+i+dl;f.parentNode.insertBefore(j,f);
+  })(window,document,"script","dataLayer","GTM-PV4RWBZ");
+</script>
 </head>
 <body>
+<noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-PV4RWBZ"
+height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
 
 <div class="notice-popup" id="noticePopup" role="dialog" aria-modal="true" aria-labelledby="noticePopupTitle" aria-describedby="noticePopupText">
   <div class="notice-dialog">
@@ -862,7 +877,6 @@ footer{background:#1F1F1F;color:#D1D1D1;padding:64px 0 28px;font-size:.93rem}
       <div class="hero-text">
         <h1 class="reveal delay-1">Implantes dentários e prótese protocolo em Guaianases</h1>
         <p class="lede reveal delay-2">Volte a mastigar, sorrir e falar com mais segurança através de um tratamento planejado para o seu caso.</p>
-        <p class="small reveal delay-3">Na OdontoPonto, você conta com uma clínica completa, estrutura moderna e atendimento humanizado para avaliar a melhor solução para substituir dentes perdidos — seja com implante unitário, múltiplos implantes ou prótese protocolo.</p>
         <ul class="hero-points reveal delay-3" aria-label="Diferenciais da clínica">
           <li>Desde 2006 cuidando de sorrisos em Guaianases</li>
           <li>Avaliação personalizada para cada paciente</li>
@@ -883,12 +897,22 @@ footer{background:#1F1F1F;color:#D1D1D1;padding:64px 0 28px;font-size:.93rem}
       <div class="hero-media reveal delay-2 reveal-blur">
         <div class="hero-frame">
           <div class="hero-visual">
-            <video autoplay muted loop playsinline preload="metadata" id="heroVideo" poster="assets/hero.jpg" aria-label="Vídeo de implantes dentários na OdontoPonto">
-              <source src="assets/Odonto-Ponto.mp4" type="video/mp4"/>
-            </video>
-            <button class="mute-toggle" id="muteToggleHero" aria-label="Ativar som">
-              <svg id="muteIcon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M11 5L6 9H2v6h4l5 4V5z"></path><line x1="23" y1="9" x2="17" y2="15"></line><line x1="17" y1="9" x2="23" y2="15"></line></svg>
-            </button>
+            <div class="hero-carousel" aria-label="Galeria de fotos da clínica">
+              <button class="pain-carousel-btn prev" type="button" aria-label="Foto anterior">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><polyline points="15 18 9 12 15 6"/></svg>
+              </button>
+              <div class="hero-carousel-track" id="heroCarouselTrack">
+                <div class="hero-carousel-slide"><img src="assets/galeria2.jpeg" alt="Foto da clínica OdontoPonto" loading="eager"/></div>
+                <div class="hero-carousel-slide"><img src="assets/galeria3.jpeg" alt="Foto da clínica OdontoPonto" loading="lazy"/></div>
+                <div class="hero-carousel-slide"><img src="assets/galeria6.jpeg" alt="Foto da clínica OdontoPonto" loading="lazy"/></div>
+                <div class="hero-carousel-slide"><img src="assets/galeria10.jpeg" alt="Foto da clínica OdontoPonto" loading="lazy"/></div>
+                <div class="hero-carousel-slide"><img src="assets/galeria9.jpeg" alt="Foto da clínica OdontoPonto" loading="lazy"/></div>
+              </div>
+              <button class="pain-carousel-btn next" type="button" aria-label="Próxima foto">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 18 15 12 9 6"/></svg>
+              </button>
+              <div class="pain-carousel-dots" id="heroCarouselDots" aria-label="Navegação da galeria"></div>
+            </div>
           </div>
         </div>
       </div>
@@ -1064,15 +1088,10 @@ footer{background:#1F1F1F;color:#D1D1D1;padding:64px 0 28px;font-size:.93rem}
         </button>
         <div class="pain-carousel-track" id="painCarouselTrack">
           <div class="pain-slide"><img src="assets/galeria1.jpeg" alt="Foto da clínica OdontoPonto 1" loading="lazy"/></div>
-          <div class="pain-slide"><img src="assets/galeria2.jpeg" alt="Foto da clínica OdontoPonto 2" loading="lazy"/></div>
-          <div class="pain-slide"><img src="assets/galeria3.jpeg" alt="Foto da clínica OdontoPonto 3" loading="lazy"/></div>
-          <div class="pain-slide"><img src="assets/galeria4.jpeg" alt="Foto da clínica OdontoPonto 4" loading="lazy"/></div>
-          <div class="pain-slide"><img src="assets/galeria5.jpeg" alt="Foto da clínica OdontoPonto 5" loading="lazy"/></div>
-          <div class="pain-slide"><img src="assets/galeria6.jpeg" alt="Foto da clínica OdontoPonto 6" loading="lazy"/></div>
-          <div class="pain-slide"><img src="assets/galeria7.jpeg" alt="Foto da clínica OdontoPonto 7" loading="lazy"/></div>
-          <div class="pain-slide"><img src="assets/galeria8.jpeg" alt="Foto da clínica OdontoPonto 8" loading="lazy"/></div>
-          <div class="pain-slide"><img src="assets/galeria9.jpeg" alt="Foto da clínica OdontoPonto 9" loading="lazy"/></div>
-          <div class="pain-slide"><img src="assets/galeria10.jpeg" alt="Foto da clínica OdontoPonto 10" loading="lazy"/></div>
+          <div class="pain-slide"><img src="assets/galeria4.jpeg" alt="Foto da clínica OdontoPonto 2" loading="lazy"/></div>
+          <div class="pain-slide"><img src="assets/galeria5.jpeg" alt="Foto da clínica OdontoPonto 3" loading="lazy"/></div>
+          <div class="pain-slide"><img src="assets/galeria7.jpeg" alt="Foto da clínica OdontoPonto 4" loading="lazy"/></div>
+          <div class="pain-slide"><img src="assets/galeria8.jpeg" alt="Foto da clínica OdontoPonto 5" loading="lazy"/></div>
         </div>
         <button class="pain-carousel-btn next" type="button" aria-label="Próxima foto">
           <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 18 15 12 9 6"/></svg>
@@ -1435,18 +1454,49 @@ faqItems.forEach(d => d.addEventListener('toggle', () => {
   if (d.open) faqItems.forEach(o => { if (o !== d) o.open = false; });
 }));
 
-// Hero Video Mute/Unmute
-const heroVideo = document.getElementById('heroVideo');
-const muteToggle = document.getElementById('muteToggleHero');
-const muteIcon = document.getElementById('muteIcon');
+// Hero carousel
+const heroCarouselTrack = document.getElementById('heroCarouselTrack');
+const heroCarouselDots = document.getElementById('heroCarouselDots');
+const heroCarouselEl = heroCarouselTrack?.closest('.hero-carousel');
 
-const unmuteSvg = '<path d="M11 5L6 9H2v6h4l5 4V5z"></path><path d="M19.07 4.93a10 10 0 0 1 0 14.14M15.54 8.46a5 5 0 0 1 0 7.07"></path>';
-const muteSvg = '<path d="M11 5L6 9H2v6h4l5 4V5z"></path><line x1="23" y1="9" x2="17" y2="15"></line><line x1="17" y1="9" x2="23" y2="15"></line>';
+if (heroCarouselTrack && heroCarouselDots && heroCarouselEl) {
+  const heroSlides = Array.from(heroCarouselTrack.children);
+  const heroPrevBtn = heroCarouselEl.querySelector('.pain-carousel-btn.prev');
+  const heroNextBtn = heroCarouselEl.querySelector('.pain-carousel-btn.next');
+  let heroIndex = 0;
+  let heroTimer;
 
-muteToggle.addEventListener('click', () => {
-  heroVideo.muted = !heroVideo.muted;
-  muteIcon.innerHTML = heroVideo.muted ? muteSvg : unmuteSvg;
-});
+  const setHeroSlide = (index) => {
+    heroIndex = (index + heroSlides.length) % heroSlides.length;
+    heroCarouselTrack.style.transform = `translateX(-${heroIndex * 100}%)`;
+    Array.from(heroCarouselDots.children).forEach((dot, i) => {
+      dot.classList.toggle('active', i === heroIndex);
+      dot.setAttribute('aria-current', i === heroIndex ? 'true' : 'false');
+    });
+  };
+
+  heroSlides.forEach((_, index) => {
+    const dot = document.createElement('button');
+    dot.type = 'button';
+    dot.setAttribute('aria-label', `Ir para a foto ${index + 1}`);
+    dot.addEventListener('click', () => { setHeroSlide(index); restartHeroAuto(); });
+    heroCarouselDots.appendChild(dot);
+  });
+
+  const nextHeroSlide = () => setHeroSlide(heroIndex + 1);
+  const prevHeroSlide = () => setHeroSlide(heroIndex - 1);
+  const startHeroAuto = () => { heroTimer = window.setInterval(nextHeroSlide, 3500); };
+  const stopHeroAuto = () => window.clearInterval(heroTimer);
+  const restartHeroAuto = () => { stopHeroAuto(); startHeroAuto(); };
+
+  heroPrevBtn?.addEventListener('click', () => { prevHeroSlide(); restartHeroAuto(); });
+  heroNextBtn?.addEventListener('click', () => { nextHeroSlide(); restartHeroAuto(); });
+  heroCarouselEl.addEventListener('mouseenter', stopHeroAuto);
+  heroCarouselEl.addEventListener('mouseleave', startHeroAuto);
+
+  setHeroSlide(0);
+  startHeroAuto();
+}
 
 // Pain section carousel
 const painCarouselTrack = document.getElementById('painCarouselTrack');
