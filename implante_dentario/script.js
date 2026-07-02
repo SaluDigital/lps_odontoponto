@@ -45,8 +45,13 @@
     overlay.addEventListener('click', function(){
       var v = holder.querySelector('video');
       if(!v) return;
-      // load source lazily
-      if(!v.getAttribute('src') && v.dataset.src){ v.setAttribute('src', v.dataset.src); }
+      // The hero uses a preview frame at 2s; swap back to the real file before playing.
+      if(v.dataset.playSrc && v.getAttribute('src') !== v.dataset.playSrc){
+        v.setAttribute('src', v.dataset.playSrc);
+        v.load();
+      } else if(!v.getAttribute('src') && v.dataset.src){
+        v.setAttribute('src', v.dataset.src);
+      }
       v.setAttribute('controls','');
       overlay.style.display = 'none';
       var p = v.play();
@@ -54,31 +59,16 @@
     });
   });
 
-  /* Sellbot WhatsApp buttons: keep click on page so the plugin can handle it */
-  document.querySelectorAll('a.sellbot-wpp-open').forEach(function(link){
-    link.removeAttribute('target');
-    link.removeAttribute('rel');
-  });
-
   document.addEventListener('click', function(event){
     var trigger = event.target.closest('.sellbot-wpp-open');
     if(!trigger) return;
 
+    var sellbotButton = document.querySelector('#sellbot-wpp-btn');
+    if(!sellbotButton) return;
+
     event.preventDefault();
     event.stopImmediatePropagation();
-
-    var openSellbot = function(tries){
-      var sellbotButton = document.querySelector('#sellbot-wpp-btn');
-      if(sellbotButton){
-        sellbotButton.click();
-        return;
-      }
-      if(tries < 20){
-        window.setTimeout(function(){ openSellbot(tries + 1); }, 150);
-      }
-    };
-
-    openSellbot(0);
+    sellbotButton.click();
   }, true);
 
   /* Carousel arrows (reviews) */
@@ -120,5 +110,16 @@
     rail.addEventListener('touchend', startAutoplay, { passive:true });
     startAutoplay();
   });
+
+  /* Small fixed popup notice */
+  var popupAviso = document.querySelector('[data-popup-aviso]');
+  var popupAvisoClose = document.querySelector('[data-popup-aviso-close]');
+  if(popupAviso && popupAvisoClose){
+    document.body.classList.add('popup-open');
+    popupAvisoClose.addEventListener('click', function(){
+      popupAviso.style.display = 'none';
+      document.body.classList.remove('popup-open');
+    });
+  }
 
 })();
