@@ -320,24 +320,31 @@ p{ text-wrap:pretty; }
 /* ============================================================
    AVALIAÇÕES
    ============================================================ */
-.rev-rail{ display:flex; gap:20px; overflow-x:auto; padding:6px 4px 22px; scroll-snap-type:x mandatory; scrollbar-width:none; }
+.rev-rail{
+  display:flex; gap:20px; overflow-x:auto; padding:6px 4px 22px;
+  scroll-snap-type:x mandatory; scroll-padding-inline:4px; scrollbar-width:none;
+}
 .rev-rail::-webkit-scrollbar{ display:none; }
 .review{
-  flex:0 0 auto; width:min(380px, 82vw); background:#fff; border:1px solid var(--line);
-  border-radius:var(--r-lg); padding:28px 28px 26px; box-shadow:var(--sh-sm); scroll-snap-align:center;
+  flex:0 0 auto; width:min(calc((100% - 40px) / 3), 380px); background:#fff; border:1px solid var(--line);
+  border-radius:var(--r-lg); padding:28px 28px 26px; box-shadow:var(--sh-sm); scroll-snap-align:start;
   display:flex; flex-direction:column; gap:14px;
+  overflow:visible;
 }
 .review.feature{ border-color:var(--brand-tint-2); box-shadow:var(--sh-md); background:linear-gradient(165deg,#fff,var(--brand-tint)); }
-.review .top{ display:flex; align-items:center; justify-content:space-between; }
+.review .top{ display:flex; align-items:flex-start; justify-content:space-between; gap:12px; }
 .stars{ display:inline-flex; gap:2px; color:#FBB400; }
 .stars svg{ width:18px; height:18px; }
-.gbadge{ display:inline-flex; align-items:center; gap:6px; font-size:12px; font-weight:700; color:var(--ink-mute); }
+.gbadge{ display:inline-flex; align-items:center; gap:6px; font-size:12px; font-weight:700; color:var(--ink-mute); flex-shrink:0; white-space:nowrap; }
 .gbadge .g{ width:17px; height:17px; }
 .review .body{ color:var(--ink-soft); font-size:15.5px; }
-.review .who{ display:flex; align-items:center; gap:12px; margin-top:auto; }
+.review .who{ display:flex; align-items:center; gap:12px; margin-top:auto; min-width:0; }
 .review .av{ width:44px; height:44px; border-radius:50%; background:var(--brand-tint); color:var(--brand-600); display:grid; place-items:center; font-weight:800; font-family:var(--font-display); flex:none; }
+.review .who > span{ min-width:0; }
+.review .who .nm,
+.review .who .dt{ display:block; overflow-wrap:anywhere; }
 .review .who .nm{ font-weight:700; font-size:15px; }
-.review .who .dt{ font-size:13px; color:var(--ink-mute); }
+.review .who .dt{ font-size:13px; color:var(--ink-mute); margin-top:2px; }
 .review .tagimp{ align-self:flex-start; display:inline-flex; align-items:center; gap:6px; font-size:12px; font-weight:700; color:var(--brand-600); background:#fff; border:1px solid var(--brand-tint-2); padding:5px 11px; border-radius:var(--r-pill); }
 .review .tagimp svg{ width:13px; height:13px; }
 
