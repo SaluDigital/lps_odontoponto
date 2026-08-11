@@ -1607,26 +1607,5 @@ if (sgTrack && sgDots && sgShell) {
 }
 </script>
 
-<script src="https://plugin.sellbot.tech/assets/js/sellbot_plugin.min.js"></script>
-<script>
-document.addEventListener('click', (event) => {
-  const trigger = event.target.closest('.sellbot-wpp-open');
-  if (!trigger) return;
-
-  event.preventDefault();
-  event.stopImmediatePropagation();
-
-  const openSellbot = (tries = 0) => {
-    const sellbotButton = document.querySelector('#sellbot-wpp-btn');
-    if (sellbotButton) {
-      sellbotButton.click();
-      return;
-    }
-    if (tries < 20) window.setTimeout(() => openSellbot(tries + 1), 150);
-  };
-
-  openSellbot();
-}, true);
-</script>
 </body>
 </html>
